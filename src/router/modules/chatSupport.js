@@ -7,7 +7,9 @@ const chatSupportRouter = {
   component: Layout,
   redirect: '/users',
   meta: {
-    title: '客服管理'
+    title: '客服管理',
+    icon: 'el-icon-user-solid'
+
   },
   children: [
     {
