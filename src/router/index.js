@@ -6,6 +6,8 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import chatSupportRouter from '@/router/modules/chatSupport'
+import messageTemplateRouter from '@/router/modules/messageTemplate'
+
 /* Router Modules */
 
 /**
@@ -99,7 +101,7 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [chatSupportRouter]
+export const asyncRoutes = [chatSupportRouter,messageTemplateRouter]
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
