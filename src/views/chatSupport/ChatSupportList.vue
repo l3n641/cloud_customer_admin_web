@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="filter-container" shadow="never">
       <div>
-        <i class="el-icon-search" />
+        <i class="el-icon-search"/>
         <span>筛选搜索</span>
         <el-button style="float: right" type="primary" size="mini" @click="handleSearchList()">
           查询结果
@@ -11,23 +11,23 @@
       <div class="search_form">
         <el-form :inline="true" :model="listQuery" size="small" label-width="100px">
           <el-form-item label="Email">
-            <el-input v-model="listQuery.email" />
+            <el-input v-model="listQuery.email"/>
           </el-form-item>
           <el-form-item label="状态">
             <el-select v-model="listQuery.status" clearable @clear="listQuery.status=null">
-              <el-option label="正常" :value="1" />
-              <el-option label="冻结" :value="0" />
+              <el-option label="正常" :value="1"/>
+              <el-option label="冻结" :value="0"/>
             </el-select>
           </el-form-item>
           <el-form-item label="是否在线">
             <el-select v-model="listQuery.is_online" clearable @clear="listQuery.is_online=null">
-              <el-option label="在线" :value="1" />
-              <el-option label="离线" :value="0" />
+              <el-option label="在线" :value="1"/>
+              <el-option label="离线" :value="0"/>
             </el-select>
           </el-form-item>
         </el-form>
       </div>
-      <div />
+      <div/>
     </el-card>
     <chat-support-dialog
       :dialog-visible="customerDialogVisible"
@@ -45,9 +45,9 @@
         border
         @sort-change="sortChange"
       >
-        <el-table-column label="id" prop="id" align="center" width="100" />
-        <el-table-column label="Email" align="center" prop="email" />
-        <el-table-column label="最后登录时间" align="center" sortable="custom" prop="last_login_at" width="200" />
+        <el-table-column label="id" prop="id" align="center" width="100"/>
+        <el-table-column label="Email" align="center" prop="email"/>
+        <el-table-column label="最后登录时间" align="center" sortable="custom" prop="last_login_at" width="200"/>
         <el-table-column label="是否在线" align="center" width="80">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.is_online===1" type="success">在线</el-tag>
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import { getChatSupportList } from '@/api/admin/chatSupport'
+import {getChatSupportList, updateChatSupportStatus} from '@/api/admin/chatSupport'
 import ChatSupportDialog from '@/views/chatSupport/components/ChatSupportDialog'
 
 const defaultListQuery = {
@@ -120,7 +120,7 @@ const defaultListQuery = {
 }
 export default {
   name: 'UserList',
-  components: { ChatSupportDialog },
+  components: {ChatSupportDialog},
   filters: {},
   data() {
     return {
@@ -160,7 +160,7 @@ export default {
       this.listQuery.page = val
       this.getList()
     },
-    sortChange({ column, prop, order }) {
+    sortChange({column, prop, order}) {
       this.listQuery.sort_field = prop
       if (!order) {
         this.listQuery.order_by = null
@@ -179,7 +179,10 @@ export default {
         this.total = res.data.total
       })
     },
-    handleChangeUserStatus(row) {
+    handleChangeUserStatus(data) {
+      updateChatSupportStatus(data.id, {status: data.status}).then(res => {
+        this.$message.success('操作成功')
+      })
     }
 
   }

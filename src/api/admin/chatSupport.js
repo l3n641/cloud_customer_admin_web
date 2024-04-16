@@ -31,3 +31,11 @@ export function updateChatSupport(id, data) {
   })
 }
 
+export function updateChatSupportStatus(id, data) {
+  return request({
+    url: '/admin/chat-support-status/' + id,
+    method: 'put',
+    data
+  })
+}
+
