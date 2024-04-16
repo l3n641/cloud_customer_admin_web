@@ -20,7 +20,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="是否在线">
-            <el-select v-model="listQuery.chat_user_is_online" clearable @clear="listQuery.chat_user_is_online=null">
+            <el-select v-model="listQuery.is_online" clearable @clear="listQuery.is_online=null">
               <el-option label="在线" :value="1" />
               <el-option label="离线" :value="0" />
             </el-select>
@@ -47,10 +47,10 @@
       >
         <el-table-column label="id" prop="id" align="center" width="100" />
         <el-table-column label="Email" align="center" prop="email" />
-        <el-table-column label="最后登录时间" align="center" sortable="custom" prop="chat_user_login_time" width="200" />
+        <el-table-column label="最后登录时间" align="center" sortable="custom" prop="last_login_at" width="200" />
         <el-table-column label="是否在线" align="center" width="80">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.chat_user_is_online===1" type="success">在线</el-tag>
+            <el-tag v-if="scope.row.is_online===1" type="success">在线</el-tag>
             <el-tag v-else type="danger">离线</el-tag>
           </template>
         </el-table-column>
